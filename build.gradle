@@ -1,0 +1,36 @@
+group 'com.mogikanlol'
+version '1.0-SNAPSHOT'
+
+
+configure(subprojects) {
+
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    ext {
+        gdxVersion = '1.9.10'
+    }
+
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+
+    }
+}
+
+project(":desktop") {
+
+    dependencies {
+        compile project(":core")
+    }
+}
