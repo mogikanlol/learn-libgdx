@@ -1,6 +1,7 @@
 package com.mogikanlol.game.core.entity;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.mogikanlol.game.core.contants.GameConstants;
 
 public class Border {
 
@@ -11,7 +12,10 @@ public class Border {
 
     private final Rectangle[] borders;
 
-    public Border(int width, int height, int blockSize) {
+    public Border() {
+        int width = GameConstants.WIDTH;
+        int height = GameConstants.HEIGHT;
+        int blockSize = GameConstants.BLOCK_SIZE;
         borders = new Rectangle[4];
 
         for (int i = 0; i < 4; i++) {

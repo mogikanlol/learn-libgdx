@@ -1,50 +1,92 @@
 package com.mogikanlol.game.core;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mogikanlol.game.core.controller.AppleController;
-import com.mogikanlol.game.core.controller.SnakeController;
-import com.mogikanlol.game.core.entity.EntityManager;
+import com.mogikanlol.game.core.entity.*;
+import com.mogikanlol.game.core.util.MVector2;
+
+import java.util.List;
 
 public class World {
 
-    private final EntityManager entityManager;
+    private final Snake snake;
+    private final Apple apple;
+    private final Border border;
+
     private final Renderer renderer;
-    private final SnakeController snakeController;
-    private final AppleController appleController;
 
     public World() {
-        entityManager = new EntityManager();
+        snake = new Snake();
+        apple = new Apple();
+        border = new Border();
 
-        renderer = new Renderer(entityManager);
+        renderer = new Renderer();
 
-        snakeController = new SnakeController(entityManager);
-        appleController = new AppleController(entityManager);
-
-        appleController.spawnApple();
-        snakeController.reset();
+        apple.spawnApple(border, snake);
+        snake.reset();
     }
 
     public void update() {
-        snakeController.updateSnake();
+        snake.updateSnake();
 
-        snakeController.checkCollisions();
+        checkCollisions();
 
-        appleController.spawnApple();
+        apple.spawnApple(border, snake);
     }
 
     public void draw(ShapeRenderer shapeRenderer) {
-        renderer.drawApple(shapeRenderer);
-        renderer.drawBorder(shapeRenderer);
-        renderer.drawSnake(shapeRenderer);
+        renderer.drawApple(shapeRenderer, apple);
+        renderer.drawBorder(shapeRenderer, border);
+        renderer.drawSnake(shapeRenderer, snake);
     }
 
     public void handleInput() {
-        snakeController.handleInput();
+        handleSnakeInput();
     }
 
     public void reset() {
-        snakeController.reset();
-        appleController.spawnApple();
+        snake.reset();
+        apple.spawnApple(border, snake);
     }
 
+    private void handleSnakeInput() {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+            snake.setDirection(SnakeDirection.UP);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+            snake.setDirection(SnakeDirection.DOWN);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            snake.setDirection(SnakeDirection.LEFT);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            snake.setDirection(SnakeDirection.RIGHT);
+        }
+    }
+
+    public void checkCollisions() {
+        SnakeBlock snakeHead = snake.getHead();
+        MVector2 applePosition = apple.getPosition();
+
+        if (snakeHead.getX() >= border.getRight()
+                || snakeHead.getX() < border.getLeft()
+                || snakeHead.getY() >= border.getBottom()
+                || snakeHead.getY() < border.getTop()) {
+            reset();
+        }
+
+        if (snake.getBody().size() > 4) {
+            List<SnakeBlock> body = snake.getBody();
+            SnakeBlock headPosition = snake.getHead();
+
+            for (int i = 4; i < body.size(); i++) {
+                SnakeBlock bodyBlock = body.get(i);
+                if (headPosition.getX() == bodyBlock.getX() && headPosition.getY() == bodyBlock.getY()) {
+                    reset();
+                }
+            }
+        }
+        if (snakeHead.getX() == applePosition.getX() && snakeHead.getY() == applePosition.getY()) {
+            snake.grow();
+            apple.setEaten(true);
+        }
+    }
 }
