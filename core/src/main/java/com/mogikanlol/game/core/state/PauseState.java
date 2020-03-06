@@ -27,7 +27,7 @@ public class PauseState extends GameState {
 
     private ShapeRenderer shapeRenderer = new ShapeRenderer();
 
-    private final int BUTTON_HEIGHT = 64;
+    private static final int BUTTON_HEIGHT = 64;
 
     private int selectedIndex = 0;
 
@@ -43,7 +43,7 @@ public class PauseState extends GameState {
         glyphLayout = new GlyphLayout();
         menuItems = new ArrayList<>();
 
-        menuItems.add(new MenuItem("Resume", () -> gsm.setState(GameStateName.PLAY)));
+        menuItems.add(new MenuItem("Resume", () -> gsm.setState(GameStateName.PLAY_SNAKE_GAME)));
         menuItems.add(new MenuItem("Go to Menu", () -> gsm.setState(GameStateName.MENU)));
     }
 

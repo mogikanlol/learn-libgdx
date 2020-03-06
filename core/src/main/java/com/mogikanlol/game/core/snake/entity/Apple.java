@@ -1,7 +1,8 @@
-package com.mogikanlol.game.core.entity;
+package com.mogikanlol.game.core.snake.entity;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mogikanlol.game.core.contants.GameConstants;
+import com.mogikanlol.game.core.snake.SnakeConstant;
 import com.mogikanlol.game.core.util.MVector2;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,7 +14,7 @@ public class Apple {
     private int radius;
 
     public Apple() {
-        radius = GameConstants.BLOCK_SIZE / 2;
+        radius = SnakeConstant.BLOCK_SIZE / 2;
         eaten = true;
         position = new MVector2();
     }
@@ -45,7 +46,7 @@ public class Apple {
 
     public void spawnApple(Border border, Snake snake) {
         if (eaten) {
-            int blockSize = GameConstants.BLOCK_SIZE;
+            int blockSize = SnakeConstant.BLOCK_SIZE;
 
             int xRange = border.getRight() - border.getLeft();
             int yRange = border.getBottom() - border.getTop();

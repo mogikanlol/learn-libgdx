@@ -2,7 +2,7 @@ package com.mogikanlol.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mogikanlol.game.core.MySnakeGame;
+import com.mogikanlol.game.core.MyApplication;
 import com.mogikanlol.game.core.contants.GameConstants;
 
 public class DesktopLauncher {
@@ -15,7 +15,7 @@ public class DesktopLauncher {
         config.resizable = false;
         config.foregroundFPS = 60;
 
-        new LwjglApplication(new MySnakeGame(), config);
+        new LwjglApplication(new MyApplication(), config);
     }
 
 }

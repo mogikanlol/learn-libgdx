@@ -1,12 +1,12 @@
-package com.mogikanlol.game.core;
+package com.mogikanlol.game.core.snake;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.mogikanlol.game.core.entity.Apple;
-import com.mogikanlol.game.core.entity.Border;
-import com.mogikanlol.game.core.entity.Snake;
-import com.mogikanlol.game.core.entity.SnakeBlock;
+import com.mogikanlol.game.core.snake.entity.Apple;
+import com.mogikanlol.game.core.snake.entity.Border;
+import com.mogikanlol.game.core.snake.entity.Snake;
+import com.mogikanlol.game.core.snake.entity.SnakeBlock;
 
 import java.util.List;
 

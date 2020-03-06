@@ -1,41 +1,38 @@
-package com.mogikanlol.game.core.state;
+package com.mogikanlol.game.core.snake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mogikanlol.game.core.World;
 import com.mogikanlol.game.core.state.base.GameState;
 import com.mogikanlol.game.core.state.base.GameStateManager;
 import com.mogikanlol.game.core.state.base.GameStateName;
 
-public class PlayState extends GameState {
+public class SnakeGameState extends GameState {
 
-    private World world;
+    private static final float TIME_STEP = 0.12f;
 
+    private SnakeGameWorld world;
     private ShapeRenderer renderer;
-
-    private final float timeStep = 0.12f;
-
     private float elapsedTime;
 
-    public PlayState(GameStateManager gsm) {
+    public SnakeGameState(GameStateManager gsm) {
         super(gsm);
         init();
     }
 
     @Override
     public void init() {
-        world = new World();
+        world = new SnakeGameWorld();
         renderer = new ShapeRenderer();
     }
 
     @Override
     public void update(float dt) {
-        if (elapsedTime > timeStep) {
+        if (elapsedTime > TIME_STEP) {
             world.update();
 
-            elapsedTime -= timeStep;
+            elapsedTime -= TIME_STEP;
         }
         updateElapsedTime(dt);
     }

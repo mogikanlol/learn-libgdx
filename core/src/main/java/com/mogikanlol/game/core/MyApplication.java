@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.mogikanlol.game.core.state.base.GameStateManager;
 import com.mogikanlol.game.core.state.base.GameStateName;
 
-public class MySnakeGame extends ApplicationAdapter {
+public class MyApplication extends ApplicationAdapter {
 
     private GameStateManager gsm;
 

@@ -1,7 +1,5 @@
 package com.mogikanlol.game.core.state;
 
-import com.mogikanlol.game.core.state.base.GameStateName;
-
 public class MenuItem {
     public String title;
 

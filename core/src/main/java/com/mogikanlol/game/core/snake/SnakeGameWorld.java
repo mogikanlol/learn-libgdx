@@ -1,14 +1,14 @@
-package com.mogikanlol.game.core;
+package com.mogikanlol.game.core.snake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mogikanlol.game.core.entity.*;
+import com.mogikanlol.game.core.snake.entity.*;
 import com.mogikanlol.game.core.util.MVector2;
 
 import java.util.List;
 
-public class World {
+public class SnakeGameWorld {
 
     private final Snake snake;
     private final Apple apple;
@@ -16,7 +16,7 @@ public class World {
 
     private final Renderer renderer;
 
-    public World() {
+    public SnakeGameWorld() {
         snake = new Snake();
         apple = new Apple();
         border = new Border();

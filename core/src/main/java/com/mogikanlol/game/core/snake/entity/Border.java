@@ -1,7 +1,8 @@
-package com.mogikanlol.game.core.entity;
+package com.mogikanlol.game.core.snake.entity;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.mogikanlol.game.core.contants.GameConstants;
+import com.mogikanlol.game.core.snake.SnakeConstant;
 
 public class Border {
 
@@ -15,7 +16,7 @@ public class Border {
     public Border() {
         int width = GameConstants.WIDTH;
         int height = GameConstants.HEIGHT;
-        int blockSize = GameConstants.BLOCK_SIZE;
+        int blockSize = SnakeConstant.BLOCK_SIZE;
         borders = new Rectangle[4];
 
         for (int i = 0; i < 4; i++) {

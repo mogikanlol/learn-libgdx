@@ -4,7 +4,7 @@ public enum GameStateName {
 
     MENU,
 
-    PLAY,
+    PLAY_SNAKE_GAME,
 
     PAUSE,
 

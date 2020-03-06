@@ -1,4 +1,4 @@
-package com.mogikanlol.game.core.entity;
+package com.mogikanlol.game.core.snake.entity;
 
 public class SnakeBlock {
 

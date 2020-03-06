@@ -3,27 +3,24 @@ package com.mogikanlol.game.core.state.base;
 import com.badlogic.gdx.Gdx;
 import com.mogikanlol.game.core.state.MenuState;
 import com.mogikanlol.game.core.state.PauseState;
-import com.mogikanlol.game.core.state.PlayState;
+import com.mogikanlol.game.core.snake.SnakeGameState;
 
 public class GameStateManager {
 
     private GameState activeState;
-
-    private PlayState playState;
-
+    private SnakeGameState snakeGameState;
     private PauseState pauseState;
-
     private MenuState menuState;
 
     public GameStateManager() {
         menuState = new MenuState(this);
-        playState = new PlayState(this);
+        snakeGameState = new SnakeGameState(this);
         pauseState = new PauseState(this);
     }
 
     public void setState(GameStateName name) {
-        if (name == GameStateName.PLAY) {
-            this.activeState = playState;
+        if (name == GameStateName.PLAY_SNAKE_GAME) {
+            this.activeState = snakeGameState;
         }
         if (name == GameStateName.PAUSE) {
             activeState = pauseState;
@@ -31,7 +28,7 @@ public class GameStateManager {
         if (name == GameStateName.MENU) {
             activeState = menuState;
 
-            playState.reset();
+            snakeGameState.reset();
         }
         if (name == GameStateName.EXIT) {
             Gdx.app.exit();

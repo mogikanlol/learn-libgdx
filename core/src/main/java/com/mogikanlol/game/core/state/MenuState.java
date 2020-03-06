@@ -1,7 +1,6 @@
 package com.mogikanlol.game.core.state;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -25,9 +24,7 @@ public class MenuState extends GameState {
 
     private GlyphLayout glyphLayout;
 
-    private int selectedIndex = 0;
-
-    private final int BUTTON_HEIGHT = 64;
+    private final static int BUTTON_HEIGHT = 64;
 
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
@@ -43,7 +40,7 @@ public class MenuState extends GameState {
         font = new BitmapFont();
         glyphLayout = new GlyphLayout();
 
-        menuItems.add(new MenuItem("Play", () -> gsm.setState(GameStateName.PLAY)));
+        menuItems.add(new MenuItem("Play Snake Game", () -> gsm.setState(GameStateName.PLAY_SNAKE_GAME)));
         menuItems.add(new MenuItem("Settings"));
         menuItems.add(new MenuItem("Credits"));
         menuItems.add(new MenuItem("Exit", () -> gsm.setState(GameStateName.EXIT)));
@@ -91,7 +88,8 @@ public class MenuState extends GameState {
                     bx,
                     by,
                     buttonWidth,
-                    BUTTON_HEIGHT);
+                    BUTTON_HEIGHT
+            );
 
             if (hovered && Gdx.input.justTouched()) {
                 menuItem.onClick.run();
@@ -123,24 +121,6 @@ public class MenuState extends GameState {
 
     @Override
     public void handleInput() {
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-//            this.selectedIndex++;
-//        } else if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-//            this.selectedIndex--;
-//        }
-//        if (this.selectedIndex == menuItems.size()) {
-//            this.selectedIndex = 0;
-//        } else if (this.selectedIndex < 0) {
-//            this.selectedIndex = menuItems.size() - 1;
-//        }
-//
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-//            Gdx.app.exit();
-//        }
-//
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-//            gsm.setState(menuItems.get(selectedIndex).stateName);
-//        }
     }
 
     @Override

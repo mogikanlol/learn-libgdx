@@ -1,6 +1,7 @@
-package com.mogikanlol.game.core.entity;
+package com.mogikanlol.game.core.snake.entity;
 
 import com.mogikanlol.game.core.contants.GameConstants;
+import com.mogikanlol.game.core.snake.SnakeConstant;
 import com.mogikanlol.game.core.util.MVector2;
 
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ public class Snake {
 
     static {
         DIRECTION_TO_VECTOR = new EnumMap<>(SnakeDirection.class);
-        DIRECTION_TO_VECTOR.put(SnakeDirection.UP, new MVector2(0, GameConstants.BLOCK_SIZE));
-        DIRECTION_TO_VECTOR.put(SnakeDirection.DOWN, new MVector2(0, -GameConstants.BLOCK_SIZE));
-        DIRECTION_TO_VECTOR.put(SnakeDirection.LEFT, new MVector2(-GameConstants.BLOCK_SIZE, 0));
-        DIRECTION_TO_VECTOR.put(SnakeDirection.RIGHT, new MVector2(GameConstants.BLOCK_SIZE, 0));
+        DIRECTION_TO_VECTOR.put(SnakeDirection.UP, new MVector2(0, SnakeConstant.BLOCK_SIZE));
+        DIRECTION_TO_VECTOR.put(SnakeDirection.DOWN, new MVector2(0, -SnakeConstant.BLOCK_SIZE));
+        DIRECTION_TO_VECTOR.put(SnakeDirection.LEFT, new MVector2(-SnakeConstant.BLOCK_SIZE, 0));
+        DIRECTION_TO_VECTOR.put(SnakeDirection.RIGHT, new MVector2(SnakeConstant.BLOCK_SIZE, 0));
     }
 
     public Snake() {
@@ -29,7 +30,7 @@ public class Snake {
 
     public void reset() {
         List<SnakeBlock> body = getBody();
-        int blockSize = GameConstants.BLOCK_SIZE;
+        int blockSize = SnakeConstant.BLOCK_SIZE;
 
         body.clear();
 
@@ -57,7 +58,7 @@ public class Snake {
     }
 
     public void updateSnake() {
-        int blockSize = GameConstants.BLOCK_SIZE;
+        int blockSize = SnakeConstant.BLOCK_SIZE;
 
         List<SnakeBlock> body = getBody();
         MVector2 vectorDir = getVectorDir();
@@ -82,7 +83,7 @@ public class Snake {
     }
 
     public void grow() {
-        int blockSize = GameConstants.BLOCK_SIZE;
+        int blockSize = SnakeConstant.BLOCK_SIZE;
         List<SnakeBlock> body = getBody();
         MVector2 vectorDir = getVectorDir();
 
