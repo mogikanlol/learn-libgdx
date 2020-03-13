@@ -1,13 +1,10 @@
-task dist(type: Jar) {
-
-    from files(sourceSets.main.output.classesDirs)
-    from files(sourceSets.main.output.resourcesDir)
-    from {configurations.compile.collect {zipTree(it)}}
-//    from files(project.assetsDir);
-
+jar {
     manifest {
-        attributes 'Main-Class': 'com.mogikanlol.game.desktop.DesktopLauncher'
+        attributes(
+                'Main-Class': 'com.mogikanlol.game.desktop.DesktopLauncher'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
-dist.dependsOn classes

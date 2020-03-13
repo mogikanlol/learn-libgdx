@@ -1,9 +1,14 @@
-package com.mogikanlol.game.core.state.base;
+package com.mogikanlol.game.core.state;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.GL20;
+import com.mogikanlol.game.core.pacman.PacmanGameState;
 import com.mogikanlol.game.core.state.MenuState;
 import com.mogikanlol.game.core.state.PauseState;
 import com.mogikanlol.game.core.snake.SnakeGameState;
+import com.mogikanlol.game.core.state.base.GameState;
+import com.mogikanlol.game.core.state.base.GameStateName;
 
 public class GameStateManager {
 
@@ -11,16 +16,22 @@ public class GameStateManager {
     private SnakeGameState snakeGameState;
     private PauseState pauseState;
     private MenuState menuState;
+    private PacmanGameState pacmanGameState;
 
     public GameStateManager() {
         menuState = new MenuState(this);
         snakeGameState = new SnakeGameState(this);
         pauseState = new PauseState(this);
+        pacmanGameState = new PacmanGameState(this);
     }
 
     public void setState(GameStateName name) {
         if (name == GameStateName.PLAY_SNAKE_GAME) {
             this.activeState = snakeGameState;
+        }
+
+        if (name == GameStateName.PLAY_PACMAN_GAME) {
+            this.activeState = pacmanGameState;
         }
         if (name == GameStateName.PAUSE) {
             activeState = pauseState;
@@ -44,6 +55,9 @@ public class GameStateManager {
     }
 
     public void draw() {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         activeState.draw();
     }
 

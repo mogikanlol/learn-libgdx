@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mogikanlol.game.core.state.base.GameState;
-import com.mogikanlol.game.core.state.base.GameStateManager;
 import com.mogikanlol.game.core.state.base.GameStateName;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class MenuState extends GameState {
         glyphLayout = new GlyphLayout();
 
         menuItems.add(new MenuItem("Play Snake Game", () -> gsm.setState(GameStateName.PLAY_SNAKE_GAME)));
-        menuItems.add(new MenuItem("Settings"));
+        menuItems.add(new MenuItem("Play Pacman Game", () -> gsm.setState(GameStateName.PLAY_PACMAN_GAME)));
         menuItems.add(new MenuItem("Credits"));
         menuItems.add(new MenuItem("Exit", () -> gsm.setState(GameStateName.EXIT)));
 

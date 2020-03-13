@@ -1,5 +1,7 @@
 package com.mogikanlol.game.core.state.base;
 
+import com.mogikanlol.game.core.state.GameStateManager;
+
 public abstract class GameState {
 
     protected GameStateManager gsm;

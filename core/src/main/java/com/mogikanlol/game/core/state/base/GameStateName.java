@@ -6,6 +6,8 @@ public enum GameStateName {
 
     PLAY_SNAKE_GAME,
 
+    PLAY_PACMAN_GAME,
+
     PAUSE,
 
     EXIT

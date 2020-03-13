@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mogikanlol.game.core.state.base.GameState;
-import com.mogikanlol.game.core.state.base.GameStateManager;
 import com.mogikanlol.game.core.state.base.GameStateName;
 
 import java.util.ArrayList;
