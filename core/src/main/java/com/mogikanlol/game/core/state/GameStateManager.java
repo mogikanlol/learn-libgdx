@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.mogikanlol.game.core.pacman.PacmanGameState;
+import com.mogikanlol.game.core.pointandclick.PointAndClickGameState;
 import com.mogikanlol.game.core.state.MenuState;
 import com.mogikanlol.game.core.state.PauseState;
 import com.mogikanlol.game.core.snake.SnakeGameState;
@@ -18,16 +19,24 @@ public class GameStateManager {
     private MenuState menuState;
     private PacmanGameState pacmanGameState;
 
+    private PointAndClickGameState pointAndClickGameState;
+
     public GameStateManager() {
         menuState = new MenuState(this);
         snakeGameState = new SnakeGameState(this);
         pauseState = new PauseState(this);
         pacmanGameState = new PacmanGameState(this);
+
+        pointAndClickGameState = new PointAndClickGameState(this);
     }
 
     public void setState(GameStateName name) {
         if (name == GameStateName.PLAY_SNAKE_GAME) {
             this.activeState = snakeGameState;
+        }
+
+        if (name == GameStateName.POINT_AND_CLICK) {
+            this.activeState = pointAndClickGameState;
         }
 
         if (name == GameStateName.PLAY_PACMAN_GAME) {

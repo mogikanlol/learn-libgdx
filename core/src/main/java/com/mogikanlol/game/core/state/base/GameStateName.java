@@ -10,5 +10,7 @@ public enum GameStateName {
 
     PAUSE,
 
-    EXIT
+    EXIT,
+
+    POINT_AND_CLICK
 }
