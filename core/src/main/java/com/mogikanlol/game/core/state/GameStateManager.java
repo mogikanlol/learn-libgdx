@@ -11,6 +11,9 @@ import com.mogikanlol.game.core.snake.SnakeGameState;
 import com.mogikanlol.game.core.state.base.GameState;
 import com.mogikanlol.game.core.state.base.GameStateName;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class GameStateManager {
 
     private GameState activeState;
@@ -18,6 +21,8 @@ public class GameStateManager {
     private PauseState pauseState;
     private MenuState menuState;
     private PacmanGameState pacmanGameState;
+
+    private Map<GameStateName, GameState> gameStates;
 
     private PointAndClickGameState pointAndClickGameState;
 
@@ -28,28 +33,23 @@ public class GameStateManager {
         pacmanGameState = new PacmanGameState(this);
 
         pointAndClickGameState = new PointAndClickGameState(this);
+
+        gameStates = new EnumMap<>(GameStateName.class);
+        gameStates.put(GameStateName.MENU, menuState);
+        gameStates.put(GameStateName.PLAY_SNAKE_GAME, snakeGameState);
+        gameStates.put(GameStateName.PAUSE, pauseState);
+        gameStates.put(GameStateName.PLAY_PACMAN_GAME, pacmanGameState);
+        gameStates.put(GameStateName.POINT_AND_CLICK, pointAndClickGameState);
     }
 
     public void setState(GameStateName name) {
-        if (name == GameStateName.PLAY_SNAKE_GAME) {
-            this.activeState = snakeGameState;
-        }
+        this.activeState = gameStates.get(name);
 
-        if (name == GameStateName.POINT_AND_CLICK) {
-            this.activeState = pointAndClickGameState;
-        }
-
-        if (name == GameStateName.PLAY_PACMAN_GAME) {
-            this.activeState = pacmanGameState;
-        }
-        if (name == GameStateName.PAUSE) {
-            activeState = pauseState;
-        }
         if (name == GameStateName.MENU) {
             activeState = menuState;
-
             snakeGameState.reset();
         }
+
         if (name == GameStateName.EXIT) {
             Gdx.app.exit();
         }

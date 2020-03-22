@@ -12,7 +12,7 @@ public class MyApplication extends ApplicationAdapter {
     @Override
     public void create() {
         gsm = new GameStateManager();
-        gsm.setState(GameStateName.POINT_AND_CLICK);
+        gsm.setState(GameStateName.MENU);
     }
 
     @Override

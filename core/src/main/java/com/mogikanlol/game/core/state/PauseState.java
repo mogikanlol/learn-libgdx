@@ -90,7 +90,7 @@ public class PauseState extends GameState {
                     BUTTON_HEIGHT);
 
             if (hovered && Gdx.input.justTouched()) {
-                menuItem.onClick.run();
+                menuItem.getOnClick().run();
             }
 
             cursorY = cursorY - (BUTTON_HEIGHT + margin);
@@ -104,7 +104,7 @@ public class PauseState extends GameState {
             float by = (float) ((height * 0.5) - (totalHeight * 0.5)) + cursorY;
 
 
-            glyphLayout.setText(font, menuItem.title);
+            glyphLayout.setText(font, menuItem.getTitle());
             float textW = glyphLayout.width;
             float textH = glyphLayout.height;
 

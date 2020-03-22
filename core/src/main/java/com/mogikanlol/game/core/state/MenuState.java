@@ -44,6 +44,31 @@ public class MenuState extends GameState {
         menuItems.add(new MenuItem("Credits"));
         menuItems.add(new MenuItem("Exit", () -> gsm.setState(GameStateName.EXIT)));
 
+        int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
+        int margin = 16;
+
+        int totalHeight = (BUTTON_HEIGHT + margin) * menuItems.size();
+        int cursorY = 0;
+
+        int buttonWidth = width / 3;
+
+        cursorY = totalHeight - (BUTTON_HEIGHT + margin);
+
+        Color defaultColor = new Color(0.4f, 0.4f, 0.5f, 1f);
+
+        for (MenuItem menuItem : menuItems) {
+
+            float bx = (float) ((width * 0.5) - (buttonWidth * 0.5));
+            float by = (float) ((height * 0.5) - (totalHeight * 0.5)) + cursorY;
+            menuItem.setX(bx);
+            menuItem.setY(by);
+            menuItem.setWidth(buttonWidth);
+            menuItem.setHeight(BUTTON_HEIGHT);
+            menuItem.setColor(defaultColor);
+
+            cursorY = cursorY - (BUTTON_HEIGHT + margin);
+        }
     }
 
     @Override
@@ -56,64 +81,48 @@ public class MenuState extends GameState {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-        int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
-        int margin = 16;
-
-        int totalHeight = (BUTTON_HEIGHT + margin) * menuItems.size();
-        int cursorY = 0;
-
-        int buttonWidth = width / 3;
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        cursorY = totalHeight - (BUTTON_HEIGHT + margin);
+        Color hoveredColor = new Color(0.8f, 0.8f, 0.9f, 1f);
         for (MenuItem menuItem : menuItems) {
 
-            Color color = new Color(0.4f, 0.4f, 0.5f, 1f);
-            float bx = (float) ((width * 0.5) - (buttonWidth * 0.5));
-            float by = (float) ((height * 0.5) - (totalHeight * 0.5)) + cursorY;
+            float bx = menuItem.getX();
+            float by = menuItem.getY();
 
             int mx = Gdx.input.getX();
             int my = height - Gdx.input.getY();
 
-            boolean hovered = mx > bx && mx < bx + buttonWidth &&
+            boolean hovered = mx > bx && mx < bx + menuItem.getWidth() &&
                     my > by && my < by + BUTTON_HEIGHT;
+
             if (hovered) {
-                color.set(0.8f, 0.8f, 0.9f, 1f);
+                shapeRenderer.setColor(hoveredColor);
+            } else {
+                shapeRenderer.setColor(menuItem.getColor());
             }
-            shapeRenderer.setColor(color);
             shapeRenderer.rect(
                     bx,
                     by,
-                    buttonWidth,
+                    menuItem.getWidth(),
                     BUTTON_HEIGHT
             );
 
             if (hovered && Gdx.input.justTouched()) {
-                menuItem.onClick.run();
+                menuItem.getOnClick().run();
             }
 
-            cursorY = cursorY - (BUTTON_HEIGHT + margin);
         }
         shapeRenderer.end();
+
+        boolean drawCenterLine = false;
+        if (drawCenterLine) {
+            drawMenuItemCenterLine();
+        }
+
         batch.begin();
-
-        cursorY = totalHeight - (BUTTON_HEIGHT + margin);
         for (MenuItem menuItem : menuItems) {
-            float bx = (float) ((width * 0.5) - (buttonWidth * 0.5));
-            float by = (float) ((height * 0.5) - (totalHeight * 0.5)) + cursorY;
-
-
-            glyphLayout.setText(font, menuItem.title);
-            float textW = glyphLayout.width;
-            float textH = glyphLayout.height;
-
-            font.setColor(0, 0, 0, 1);
-            float textX = (float) (width * 0.5 - textW * 0.5);
-            float textY = (float) (by  + BUTTON_HEIGHT / 2);
-            font.draw(batch, glyphLayout, textX, textY);
-            cursorY = cursorY - (BUTTON_HEIGHT + margin);
+            menuItem.draw(batch);
         }
         batch.end();
     }
@@ -132,4 +141,19 @@ public class MenuState extends GameState {
 
     }
 
+    private void drawMenuItemCenterLine() {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
+        for (MenuItem menuItem : menuItems) {
+            shapeRenderer.line(
+                    0,
+                    (float) (menuItem.getY() + menuItem.getHeight() * 0.5),
+                    Gdx.graphics.getWidth(),
+                    (float) (menuItem.getY() + menuItem.getHeight() * 0.5),
+                    Color.OLIVE,
+                    Color.CORAL
+            );
+        }
+        shapeRenderer.end();
+    }
 }
